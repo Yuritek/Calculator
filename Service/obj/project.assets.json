@@ -182,11 +182,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Калькулятор\\Yuritek\\Calculator\\Calculator\\Service.csproj",
+      "projectUniqueName": "C:\\Калькулятор\\Yuritek\\Calculator\\Service\\Service.csproj",
       "projectName": "Service",
-      "projectPath": "C:\\Калькулятор\\Yuritek\\Calculator\\Calculator\\Service.csproj",
+      "projectPath": "C:\\Калькулятор\\Yuritek\\Calculator\\Service\\Service.csproj",
       "packagesPath": "C:\\Users\\jobc7_000\\.nuget\\packages\\",
-      "outputPath": "C:\\Калькулятор\\Yuritek\\Calculator\\Calculator\\obj\\",
+      "outputPath": "C:\\Калькулятор\\Yuritek\\Calculator\\Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

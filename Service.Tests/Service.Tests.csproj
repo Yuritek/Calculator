@@ -74,7 +74,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Calculator\Service.csproj">
+    <ProjectReference Include="..\Service\Service.csproj">
       <Project>{252016d1-a7a2-4f87-b222-4ea85de25f9e}</Project>
       <Name>Service</Name>
     </ProjectReference>
