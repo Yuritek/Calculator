@@ -8,7 +8,7 @@ namespace Calculator.App
 	{
 		static void Main(string[] args)
 		{
-			var parser = new PostfixNotationExpression(new CalculationOperation(), new PostfixNotationParseEquation(new PriorityOperation()));
+			var parser = new PostfixNotationExpression(new CalculationOperation(), new PostfixNotationParseEquation(new CalculationOperation()));
 			while (true)
 			{
 				Console.WriteLine("Результат:"+parser.Execute(Console.ReadLine()));

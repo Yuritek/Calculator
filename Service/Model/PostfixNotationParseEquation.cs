@@ -4,33 +4,34 @@ using static System.Char;
 
 namespace Service.Model
 {
-	public class PostfixNotationParseEquation : IPostfixNotationParseEquation
+    public class PostfixNotationParseEquation : IPostfixNotationParseEquation
 	{
-		private readonly IPriorityOperation _priorityOperation;
-		public PostfixNotationParseEquation(IPriorityOperation priorityOperation)
+		private readonly ICalculationOperation _calculationOperation;
+
+		public PostfixNotationParseEquation(ICalculationOperation calculationOperation)
 		{
-			_priorityOperation = priorityOperation;
+			_calculationOperation = calculationOperation;
 		}
+
 		private IEnumerable<string> ParseEquation(string input)
 		{
 			int pos = 0;
 			while (pos < input.Length)
 			{
 				string s = input[pos].ToString();
-				if(input[pos].ToString().ToTryParseToDouble(out _))
+				if (IsDigit(input[pos]) || input[pos] == '-' && ((pos > 0 && !IsDigit(input[pos - 1])) || pos == 0))
 				{
-					if (IsDigit(input[pos]))
-						for (int i = pos + 1;
-							i < input.Length &&
-							(IsDigit(input[i]) || input[i] == ',' || input[i] == '.');
-							i++)
-							s += input[i];
+					for (int i = pos + 1;
+						i < input.Length &&
+						(IsDigit(input[i]) || input[i] == ',' || input[i] == '.');
+						i++)
+						s += input[i];
 				}
-
 				yield return s;
 				pos += s.Length;
 			}
 		}
+
 		public string[] GetPostfixNotationEquation(string input)
 		{
 			List<string> outputSeparated = new List<string>();
@@ -50,11 +51,11 @@ namespace Service.Model
 								s = stack.Pop();
 							}
 						}
-						else if (_priorityOperation.GetPriority(c) > _priorityOperation.GetPriority(stack.Peek()))
+						else if (stack.Peek() != "(" &&_calculationOperation.GetPriority(c) > _calculationOperation.GetPriority(stack.Peek()))
 							stack.Push(c);
 						else
 						{
-							while (stack.Count > 0 && _priorityOperation.GetPriority(c) <= _priorityOperation.GetPriority(stack.Peek()))
+							while (stack.Count > 0 && stack.Peek() != "(" && _calculationOperation.GetPriority(c) <= _calculationOperation.GetPriority(stack.Peek()))
 								outputSeparated.Add(stack.Pop());
 							stack.Push(c);
 						}
@@ -65,6 +66,7 @@ namespace Service.Model
 				else
 					outputSeparated.Add(c);
 			}
+
 			if (stack.Count > 0)
 				foreach (string c in stack)
 					outputSeparated.Add(c);

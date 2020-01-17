@@ -11,7 +11,7 @@ namespace Service.Tests
 		[SetUp]
 		public void Initialize()
 		{
-			var mock = new Mock<IPriorityOperation>();
+			var mock = new Mock<ICalculationOperation>();
 			mock.Setup(m => m.GetPriority("+")).Returns(2);
 			mock.Setup(m => m.GetPriority("*")).Returns(3);
 			_calculationOperation = new PostfixNotationParseEquation(mock.Object);
